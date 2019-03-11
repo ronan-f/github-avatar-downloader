@@ -1,6 +1,7 @@
 let secrets = require('./secrets');
 let request = require('request');
 let fs = require('fs');
+require('dotenv').config()
 let input1 = process.argv[2]; //user input
 let input2 = process.argv[3];
 
@@ -12,7 +13,8 @@ function getRepoContributors(repoOwner, repoName, cb) {
   let options = {
     url: "https://api.github.com/repos/" + repoOwner + "/" + repoName + "/contributors",
     headers: {
-      'User-Agent': 'request'
+      'User-Agent': 'request',
+      'Authorization': process.env.GITHUB_TOKEN
     }
   };
 
@@ -42,4 +44,5 @@ if(input1 === undefined || input2 === undefined){
 } else {
 
 getRepoContributors(input1, input2, loopContributors);
+
 }
