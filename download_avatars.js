@@ -21,11 +21,9 @@ function getRepoContributors(repoOwner, repoName, cb) {
 
 function loopContributors(error, data){
   data.forEach(function(collaborator) {
-    downloadImageByURL(collaborator.avatar_url, './avatars/new.jpg');
+    downloadImageByURL(collaborator.avatar_url, './avatars/' + collaborator.login + '.jpg');
   });
 };
-
-
 
 function downloadImageByURL(url, filePath) {
 
@@ -35,7 +33,6 @@ function downloadImageByURL(url, filePath) {
        })
        .pipe(fs.createWriteStream(filePath));
 }
-
 
 getRepoContributors('jquery', 'jquery', loopContributors);
 
